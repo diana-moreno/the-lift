@@ -14,19 +14,21 @@ class Lift {
     this.requests   = [];
     this.waitingList = [];
     this.passengers = [];
+    this.lastFloor = floorDom[0];
+    this.historyPass = [];
   }
   start() {
-    this.starting = setInterval(() => this.update(), 1500);
+    this.updateInterval = setInterval(() => this.update(), 1000);
   }
   stop() {
-    clearInterval(this.starting)
+    clearInterval(this.updateInterval)
   }
   update() {
     if(!this.requests.length) {
       this.stop();
     } else {
       this.setDirection();
-      this.log();
+      this.updateFloor();
       this._passengersEnter();
       this._passengersLeave();
       this._deleteRequests();
@@ -34,41 +36,37 @@ class Lift {
   }
   setDirection() {
     let destination = this.requests[0];
-    if(destination > this.floor) { // no >=
+    if(destination > this.floor) {
       this.direction = 'up'
       } else {
         this.direction = 'down'
       }
     this.direction === 'up' ? this.floorUp() : this.floorDown();
   }
-  getDestinationFloor(i) {
-    let destination = prompt('A que piso vas?')
-    this.destinationFloor =Number(destination)
-    this.passengers[i].destinationFloor = this.destinationFloor
-    this.waitingList[i].destinationFloor = this.destinationFloor
-  }
   _passengersEnter() {
-    if(this.waitingList.length) {
+    if(this.waitingList.length > 0) {
       for(let i = this.waitingList.length - 1; i >= 0; i--) {
         if(this.floor === this.waitingList[i].originFloor) {
           let text = `${this.waitingList[i].name} has entered the lift in floor ${this.waitingList[i].originFloor} to floor ${this.waitingList[i].destinationFloor}.`
-          this.appendText(text)
+          this.renderAccions(text, liftExplanation)
           this.passengers.push(this.waitingList[i])
           this.requests.push(this.waitingList[i].destinationFloor)
           this.waitingList.splice(i, 1);
+          this.renderPassengers()
         }
       }
     }
   }
   _passengersLeave() {
-    if(this.passengers.length) {
+    if(this.passengers.length > 0) {
       for(let i = this.passengers.length - 1; i >= 0; i--) {
         if (this.floor === this.passengers[i].destinationFloor) {
           let text = `${this.passengers[i].name} has left the lift.`
-          this.appendText(text)
+          this.renderAccions(text, liftExplanation)
+          this.passengers.splice(i, 1);
+          this.renderPassengers()
         }
       }
-      this.passengers = this.passengers.filter(passenger => passenger.destinationFloor !== this.floor); //elimina a los pasajeros que salen de la lista pasajeros
     }
   }
   _deleteRequests() {
@@ -78,29 +76,48 @@ class Lift {
       }
     }
   }
-  floorUp() {
-    this.floor < this.MAXFLOOR ? this.floor++ : this.floor = 10;
+  floorUp(){
+    this.floor = this.floor < this.MAXFLOOR ? this.floor + 1 : this.MAXFLOOR;
   }
-  floorDown() {
-    this.floor > 0 ? this.floor-- : this.floor = 0;
+
+  floorDown(){
+    this.floor = this.floor > 0 ? this.floor - 1 : 0;
   }
-  call(person) {
-    this.waitingList = [...this.waitingList, person] //.push(person)
+  callElevator(person) {
+    this.waitingList = [...this.waitingList, person]
+    this.historyPass.push(person.name)
     this.requests = [...this.requests, person.originFloor]
     let text = `${person.name} has called the lift from floor ${person.originFloor}.`
-    this.appendText(text)
+    this.renderAccions(text, liftExplanation)
+    this.renderPassengers()
   }
-  log() {
-    floorDom.forEach(floor => floor.style.backgroundColor = '#d6d6d6')
-    floorDom[this.floor].style.backgroundColor = '#1dbcad'
-    let text = `Direction: ${this.direction} | Floor: ${this.floor}`
-    this.appendText(text)
+  updateFloor() {
+    // set the color of the previous floor
+    this.lastFloor.style.backgroundColor = '#dfdfdf'
+    // set the color of the current floor
+    this.currentFloor = floorDom[this.floor]
+    this.currentFloor.style.backgroundColor = '#1dbcad'
+    // display the message
+    this.renderAccions(`Direction: ${this.direction} | Floor: ${this.floor}`, liftExplanation)
+    // set the last floor as the current one to update it properly in the next update
+    this.lastFloor = this.currentFloor
   }
-  appendText(text) {
+  renderAccions(text, domElem) {
     let node = document.createElement("p");
     let textnode = document.createTextNode(text);
     node.appendChild(textnode);
-    liftExplanation.appendChild(node);
+    domElem.appendChild(node);
+  }
+  renderPassengers() {
+    let nameCurrentPassengers = [];
+    this.passengers.forEach(passenger => nameCurrentPassengers.push(passenger.name));
+    currentPassengers.innerHTML = nameCurrentPassengers.join(', ');
+
+    let nameWaitingPassengers = [];
+    this.waitingList.forEach(passenger => nameWaitingPassengers.push(passenger.name));
+    waitingPassengers.innerHTML = nameWaitingPassengers.join(', ');
+
+    historyPassengers.innerHTML = this.historyPass.join(', ');
   }
 }
 
@@ -116,7 +133,9 @@ let floor8 = document.getElementById('8')
 let floor9 = document.getElementById('9')
 let floor10 = document.getElementById('10')
 let liftExplanation = document.getElementById('lift-explanation')
-
+let currentPassengers = document.getElementById('current-passengers')
+let waitingPassengers = document.getElementById('waiting-passengers')
+let historyPassengers = document.getElementById('history-passengers')
 
 floor0.style.backgroundColor = '#1dbcad'
 
@@ -124,15 +143,16 @@ let floorDom = [floor0, floor1, floor2, floor3, floor4, floor5, floor6, floor7, 
 
 let elevator = new Lift();
 
-function call(e) {
+function callElevator(e) {
   elevator.start()
   let name = prompt('Welcome to the lift. What is your name?')
   let originFloor = Number(e.target.id)
-  let destinationFloor = Number(prompt('What floor are you going?'))
-  if(!destinationFloor) destinationFloor = originFloor;
+  let destinationPrompt = prompt('Which floor are you going?')
+  if(destinationPrompt === '') destinationPrompt = originFloor;
+  let destinationFloor = Number(destinationPrompt)
   if(!name) name = 'Anonymous'
   let person = new Person(name, originFloor, destinationFloor);
-  elevator.call(person)
+  elevator.callElevator(person)
 }
 
-floorDom.forEach(floor => floor.onclick = call)
+floorDom.forEach(floor => floor.onclick = callElevator)
