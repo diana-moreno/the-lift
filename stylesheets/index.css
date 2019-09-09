@@ -1,16 +1,17 @@
 html {
   height: 100%;
-  min-height: 850px;
-  min-width: 1430px;
+/*  min-height: 850px;
+  min-width: 1430px;*/
+  overflow: hidden;
 }
 body {
   background: deepskyblue;
-  border-bottom: 83px solid #009688;
   font-family: "Trebuchet MS", Arial, sans-serif;
-  box-sizing: border-box;
   height: 100%;
   margin: 0;
-  overflow: hidden;
+  aaaborder-bottom: 83px solid #009688;
+  aaaabox-sizing: border-box;
+  aaaaoverflow: hidden;
 }
 header {
   height: 15%;
@@ -20,7 +21,7 @@ header {
 }
 main {
   display: flex;
-  height: 85%;
+  height: 75%;
 }
 h1 {
   margin: 0;
@@ -83,7 +84,6 @@ p {
   overflow: auto;
   text-align: center;
 }
-
 
 /*The lift*/
 .floor, .window, .lift-floor {
@@ -245,4 +245,11 @@ z-index: 3;
   z-index:0;
   margin:-20px 0 0 30px;
   position:relative;
+}
+
+/*The ground*/
+.ground {
+  background-color: #009688;
+  height: 10%;
+  width: 100%;
 }
