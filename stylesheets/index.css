@@ -149,23 +149,29 @@ p {
 }
 @-webkit-keyframes animate{
   0%  { }
-  50% { -webkit-transform:translateX(400px) scale(1.2);}
+  50% { -webkit-transform:translateX(400px) scale(1.5);}
+  100% {-webkit-transform:translateX(0px); }
+}
+@-webkit-keyframes animate-left{
+  0%  { }
+  50% { -webkit-transform:translateX(-400px) scale(1.2);}
   100% {-webkit-transform:translateX(0px); }
 }
 #cloud-1{
-  -webkit-animation-name: animate;
-  -webkit-animation-duration: 30s;
-  -webkit-animation-timing-function: lineal;
+  -webkit-animation-name: animate-left;
+  -webkit-animation-duration: 90s;
+  -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   opacity: 0.6;
   margin: -64px;
   position: absolute;
-  animation-delay: 10s;
+  animation-delay: 1s;
+  margin-left: 400px;
 }
 #cloud-2{
  -webkit-animation-name: animate;
- -webkit-animation-duration: 35s;
- -webkit-animation-timing-function: lineal;
+ -webkit-animation-duration: 100s;
+ -webkit-animation-timing-function: linear;
  -webkit-animation-iteration-count:infinite;
   opacity: 0.7;
  position:absolute;
@@ -174,8 +180,8 @@ p {
 }
 #cloud-3{
 -webkit-animation-name: animate;
--webkit-animation-duration: 40s;
--webkit-animation-timing-function: lineal;
+-webkit-animation-duration: 85s;
+-webkit-animation-timing-function: linear;
 -webkit-animation-iteration-count: infinite;
 opacity: 0.8;
 position: absolute;
