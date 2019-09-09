@@ -139,8 +139,6 @@ let currentPassengers = document.getElementById('current-passengers')
 let waitingPassengers = document.getElementById('waiting-passengers')
 let historyPassengers = document.getElementById('history-passengers')
 
-//floor0.style.backgroundColor = '#a3a3a3'
-
 let floorDom = [floor0, floor1, floor2, floor3, floor4, floor5, floor6, floor7, floor8, floor9, floor10]
 
 let elevator = new Lift();
