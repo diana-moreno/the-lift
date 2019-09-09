@@ -1,11 +1,16 @@
 html {
   height: 100%;
   min-height: 850px;
+  min-width: 1430px;
 }
 body {
+  background: deepskyblue;
+  border-bottom: 83px solid #009688;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  box-sizing: border-box;
   height: 100%;
   margin: 0;
-  background-color: #bfe0df;
+  overflow: hidden;
 }
 header {
   height: 15%;
@@ -15,7 +20,7 @@ header {
 }
 main {
   display: flex;
-  height: 80%;
+  height: 85%;
 }
 h1 {
   margin: 0;
@@ -23,19 +28,51 @@ h1 {
   letter-spacing: 0.3rem;
   text-decoration: overline underline;
 }
-h2, h1, div, p, li {
+h2, h1, div, p {
   color: #4a4848;
-}
-h2 {
-  margin-top: 0;
-}
-li {
-  margin: 0.5rem 0;
 }
 p {
   font-size: 1.2rem;
   margin-bottom: 0;
   margin-top: 0.3rem;
+}
+
+/*The three containers*/
+.first-container {
+  display: flex;
+  width: 40%;
+  justify-content: center;
+  align-items: flex-end;
+}
+.second-container {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  flex-direction: column;
+}
+.third-container {
+  display: flex;
+  width: 30%;
+}
+
+/*Container's text content*/
+.instruccions {
+  text-align: center;
+  height: 55%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.passengers-container {
+  overflow-wrap: break-word;
+  max-width: 100%;
+  height: 45%;
+}
+.passengers {
+  height: 5rem;
+}
+.instruccions > p {
+  margin-bottom: 0.7rem;
 }
 .text-container {
   width: 80%;
@@ -46,11 +83,10 @@ p {
   overflow: auto;
   text-align: center;
 }
-.lift-explanation {
-  margin: 0;
-}
+
+
+/*The lift*/
 .floor, .window, .lift-floor {
-  border: 1px solid #4a4848;
   width: 5.5rem;
   margin: 0;
   height: 3.5rem;
@@ -58,7 +94,7 @@ p {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #5aa4ff;
+  background-color: #dd8092;
   font-size: 1.5rem;
   box-sizing: border-box;
 }
@@ -71,50 +107,15 @@ p {
   justify-content: center;
   width: 100%;
   height: 100%;
+  z-index: 3;
 }
 .window {
   background-color: #c6e6f0;
   height: 1.5rem;
   width: 1rem;
 }
-.ground {
-  height: 5%;
-  width: 100%;
-  background-color: #2c1717cf;
-}
-.first-container {
-  display: flex;
-  width: 40%;
-  justify-content: center;
-}
-.second-container {
-  display: flex;
-  width: 20%;
-  align-items: center;
-  flex-direction: column;
-}
-.third-container {
-  display: flex;
-  width: 40%;
-}
-.passengers-container {
-  overflow-wrap: break-word;
-  max-width: 100%;
-  height: 45%;
-}
-.passengers {
-  height: 5rem;
-}
-.text-container > h2 {
-  margin: 0;
-}
-.front-building {
-  display: flex;
-  border: 1px solid #4a4848;
-}
 .door {
-  background-color: #009688;
-  border: 1px solid #4a4848;
+  background-color: #c6e6f0;
   border-bottom: 0;
   box-sizing: border-box;
 }
@@ -123,18 +124,125 @@ p {
   width: 50%
 }
 .lift-floor {
-  background-color: #4b85cc;
+  background-color: #dd8092;
   display: flex;
   justify-content: center;
   border: 0;
 }
-.lift-floor-floor {
-  border: 1px solid;
+
+/*The clouds*/
+.circ1{
+  width:120px;
+  height:120px;
+  border-radius:120px;
+  background-color:rgb(255, 255, 255);
+  margin:20px 0 0 60px;
+ }
+.circ2{
+  width:150px;
+  height:80px;
+  border-radius: 80px / 50px;
+  background-color:rgb(255, 255, 255);
+  margin:-90px 0 0 80px;
+ }
+.circ3{
+  width:150px;
+  height:90px;
+  border-radius: 80px / 50px;
+  background-color:rgb(255, 255, 255);
+  margin:-90px 0 0 0px;
 }
-.instruccions {
-  text-align: center;
-  height: 55%;
+@-webkit-keyframes animate{
+  0%  { }
+  50% { -webkit-transform:translateX(400px) scale(1.2);}
+  100% {-webkit-transform:translateX(0px); }
 }
-.instruccions > p {
-  margin-bottom: 0.7rem;
+#cloud-1{
+  -webkit-animation-name: animate;
+  -webkit-animation-duration: 30s;
+  -webkit-animation-timing-function: lineal;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0.6;
+  margin: -64px;
+  position: absolute;
+  animation-delay: 10s;
+}
+#cloud-2{
+ -webkit-animation-name: animate;
+ -webkit-animation-duration: 35s;
+ -webkit-animation-timing-function: lineal;
+ -webkit-animation-iteration-count:infinite;
+  opacity: 0.7;
+ position:absolute;
+ margin:30px 0 0 0;
+   animation-delay: 5s;
+}
+#cloud-3{
+-webkit-animation-name: animate;
+-webkit-animation-duration: 40s;
+-webkit-animation-timing-function: lineal;
+-webkit-animation-iteration-count: infinite;
+opacity: 0.8;
+position: absolute;
+margin: -119px 0 0 50px;
+z-index: 3;
+}
+
+/*The sun*/
+.sun{
+  width:100px;
+  height:100px;
+  border-radius:100px;
+  background:yellow;
+  position: absolute;
+  left: 2rem;
+  top: 3rem;
+}
+
+/*The tree*/
+.tree{
+  width: 200px;
+  height: 180px;
+  margin-left: 6rem;
+  z-index: 20;
+}
+.tree-sheets1{
+  width:100px;
+  height:80px;
+  border-radius:100px /80px;
+  background:yellowgreen;
+  position: relative;
+  z-index: 1;
+}
+.tree-sheets2{
+  width:120px;
+  height:100px;
+  border-radius:120px /100px;
+  background:yellowgreen;
+  transform:rotate(-2deg);
+  margin:-50px 0 0 30px;
+  position: relative;
+  z-index: 1;
+}
+.tree-sheets3{
+  width:120px;
+  height:100px;
+  border-radius:100px /80px;
+  background:yellowgreen;
+  transform:rotate(5deg);
+  margin:-100px 0 0 -30px;
+  position: relative;
+  z-index: 1;
+}
+.tree-trunk{
+  width:20px;
+  height:200px;
+  border-top: 70px solid brown;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 0px solid transparent;
+  transform:rotate(-2deg);
+  z-index:0;
+  margin:-20px 0 0 30px;
+  position:relative;
 }

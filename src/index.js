@@ -95,13 +95,11 @@ class Lift {
   }
   updateFloor() {
     // set the color of the previous floor
-    this.lastFloor.style.backgroundColor = '#5aa4ff'
-    this.lastFloor.style.border = ''
-    floor0.style.backgroundColor = '#009688'
+    this.lastFloor.style.backgroundColor = '#dd8092'
+    floor0.style.backgroundColor = '#c6e6f0'
     // set the color of the current floor
     this.currentFloor = floorDom[this.floor]
-    this.currentFloor.style.backgroundColor = '#ac74b6'
-    this.currentFloor.style.border = '1px solid #4a4848'
+    this.currentFloor.style.backgroundColor = '#aea0d6'
     // display the message
     this.renderAccions(`Direction: ${this.direction} | Floor: ${this.floor}`, liftExplanation)
     // set the last floor as the current one to update it properly in the next update
