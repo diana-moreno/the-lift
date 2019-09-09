@@ -152,6 +152,11 @@ p {
   50% { -webkit-transform:translateX(400px) scale(1.5);}
   100% {-webkit-transform:translateX(0px); }
 }
+@-webkit-keyframes animate-other{
+  0%  { }
+  50% { -webkit-transform:translateX(360px) scale(1.2);}
+  100% {-webkit-transform:translateX(0px); }
+}
 @-webkit-keyframes animate-left{
   0%  { }
   50% { -webkit-transform:translateX(-400px) scale(1.2);}
@@ -169,8 +174,8 @@ p {
   margin-left: 400px;
 }
 #cloud-2{
- -webkit-animation-name: animate;
- -webkit-animation-duration: 100s;
+ -webkit-animation-name: animate-other;
+ -webkit-animation-duration: 140s;
  -webkit-animation-timing-function: linear;
  -webkit-animation-iteration-count:infinite;
   opacity: 0.7;
