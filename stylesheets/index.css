@@ -45,7 +45,6 @@ p {
 .second-container {
   display: flex;
   width: 30%;
-  align-items: center;
   flex-direction: column;
 }
 .third-container {
@@ -55,7 +54,6 @@ p {
 
 /*Container's text content*/
 .instruccions {
-  text-align: center;
   height: 55%;
   justify-content: center;
   display: flex;
