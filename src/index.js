@@ -47,6 +47,8 @@ class Lift {
     if(this.waitingList.length > 0) {
       for(let i = this.waitingList.length - 1; i >= 0; i--) {
         if(this.floor === this.waitingList[i].originFloor) {
+    floorDom[this.floor].style.color = ''
+    console.log(floorDom[this.floor])
           let text = `${this.waitingList[i].name} has entered the lift in floor ${this.waitingList[i].originFloor} to floor ${this.waitingList[i].destinationFloor}.`
           this.renderAccions(text, liftExplanation)
           this.passengers.push(this.waitingList[i])
@@ -93,10 +95,13 @@ class Lift {
   }
   updateFloor() {
     // set the color of the previous floor
-    this.lastFloor.style.backgroundColor = '#dfdfdf'
+    this.lastFloor.style.backgroundColor = '#5aa4ff'
+    this.lastFloor.style.border = ''
+    floor0.style.backgroundColor = '#009688'
     // set the color of the current floor
     this.currentFloor = floorDom[this.floor]
-    this.currentFloor.style.backgroundColor = '#1dbcad'
+    this.currentFloor.style.backgroundColor = '#ac74b6'
+    this.currentFloor.style.border = '1px solid #4a4848'
     // display the message
     this.renderAccions(`Direction: ${this.direction} | Floor: ${this.floor}`, liftExplanation)
     // set the last floor as the current one to update it properly in the next update
@@ -137,13 +142,14 @@ let currentPassengers = document.getElementById('current-passengers')
 let waitingPassengers = document.getElementById('waiting-passengers')
 let historyPassengers = document.getElementById('history-passengers')
 
-floor0.style.backgroundColor = '#1dbcad'
+//floor0.style.backgroundColor = '#a3a3a3'
 
 let floorDom = [floor0, floor1, floor2, floor3, floor4, floor5, floor6, floor7, floor8, floor9, floor10]
 
 let elevator = new Lift();
 
 function callElevator(e) {
+  e.target.style.color = 'white'
   elevator.start()
   let name = prompt('Welcome to the lift. What is your name?')
   let originFloor = Number(e.target.id)
