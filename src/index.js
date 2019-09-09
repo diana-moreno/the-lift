@@ -147,7 +147,7 @@ function validateDestinationNumber(destinationPrompt, originFloor) {
   if(destinationPrompt === '' || destinationPrompt === null) {
     destinationPrompt = originFloor;
   }
-  while(destinationPrompt != 0 && destinationPrompt != 1 && destinationPrompt != 2 && destinationPrompt != 3 && destinationPrompt != 4 && destinationPrompt != 5 && destinationPrompt !== 6 && destinationPrompt != 7 && destinationPrompt != 8 && destinationPrompt != 9 && destinationPrompt != 10 && destinationPrompt != null)
+  while(destinationPrompt != 0 && destinationPrompt != 1 && destinationPrompt != 2 && destinationPrompt != 3 && destinationPrompt != 4 && destinationPrompt != 5 && destinationPrompt != 6 && destinationPrompt != 7 && destinationPrompt != 8 && destinationPrompt != 9 && destinationPrompt != 10 && destinationPrompt != null)
     {
       alert('Please, insert a number betweeen 0 and 10.')
       destinationPrompt = prompt('Which floor are you going?')
