@@ -48,7 +48,6 @@ class Lift {
       for(let i = this.waitingList.length - 1; i >= 0; i--) {
         if(this.floor === this.waitingList[i].originFloor) {
     floorDom[this.floor].style.color = ''
-    console.log(floorDom[this.floor])
           let text = `${this.waitingList[i].name} has entered the lift in floor ${this.waitingList[i].originFloor} to floor ${this.waitingList[i].destinationFloor}.`
           this.renderAccions(text, liftExplanation)
           this.passengers.push(this.waitingList[i])
@@ -146,15 +145,26 @@ let floorDom = [floor0, floor1, floor2, floor3, floor4, floor5, floor6, floor7, 
 
 let elevator = new Lift();
 
+function validateDestinationNumber(destinationPrompt, originFloor) {
+  if(destinationPrompt === '' || destinationPrompt === null) {
+    destinationPrompt = originFloor;
+  }
+  while(destinationPrompt != 0 && destinationPrompt != 1 && destinationPrompt != 2 && destinationPrompt != 3 && destinationPrompt != 4 && destinationPrompt != 5 && destinationPrompt !== 6 && destinationPrompt != 7 && destinationPrompt != 8 && destinationPrompt != 9 && destinationPrompt != 10 && destinationPrompt != null)
+    {
+      alert('Please, insert a number betweeen 0 and 10.')
+      destinationPrompt = prompt('Which floor are you going?')
+    }
+  return Number(destinationPrompt);
+}
+
 function callElevator(e) {
   e.target.style.color = 'white'
   elevator.start()
   let name = prompt('Welcome to the lift. What is your name?')
+  if(!name) name = 'Anonymous'
   let originFloor = Number(e.target.id)
   let destinationPrompt = prompt('Which floor are you going?')
-  if(destinationPrompt === '') destinationPrompt = originFloor;
-  let destinationFloor = Number(destinationPrompt)
-  if(!name) name = 'Anonymous'
+  let destinationFloor = validateDestinationNumber(destinationPrompt, originFloor)
   let person = new Person(name, originFloor, destinationFloor);
   elevator.callElevator(person)
 }
