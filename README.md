@@ -13,6 +13,8 @@ The aim of this project is to demonstrate the asynchrony of Node, and then was t
 - The program will ask for name and floor destination.
 - The lift will travel to user's floor, pick him up and drop him off in the destination floor.
 - At the same time, other users are free to call the elevator. If it is on the way, the user will be picked up.
+- There is a section with information about the active and waiting passengers that actualized automatically with every action.
+- The last section logs a history of what's happenning in every second because with the asynchrone could be difficult to attend every detail.
 
 ### **Setup**
 ---
